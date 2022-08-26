@@ -1,6 +1,8 @@
 import "./App.css";
 
 import React, { Component } from "react";
+import CardListComponenet from "./components/card-list/CardListComponenet";
+import SearchBarComponent from "./components/search-box/SearchBarComponent";
 
 class App extends Component {
   constructor() {
@@ -11,6 +13,11 @@ class App extends Component {
     };
   }
 
+  handleOnchange = (e)=>{
+    const serchmonster = e.target.value.toLocaleLowerCase();
+     this.setState({ searchfilter: serchmonster })          
+ }
+
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
@@ -18,19 +25,17 @@ class App extends Component {
   }
 
   render() {
-    const searchedMonster =  this.state.monsters.filter((monsters)=>{
-      return monsters.name.toLocaleLowerCase().includes(this.state.searchfilter)
+    const {monsters, searchfilter} = this.state;
+    const handleOnchange = this.handleOnchange;
+
+    const searchedMonster =  monsters.filter((monsters)=>{
+      return monsters.name.toLocaleLowerCase().includes(searchfilter)
     })
     return (
       <div className="App">
-        <input type="text" name="Search-text"  id="searchbar" placeholder="Search Monster" onKeyUp={(e)=>{
-           const serchmonster = e.target.value.toLocaleLowerCase();
-            this.setState({ searchfilter: serchmonster })          
-        }}/>
+      <SearchBarComponent handleOnchange={handleOnchange} />
 
-        {searchedMonster.map((users) => {
-          return <h1 key={users.id}>{users.name}</h1>;
-        })}
+       <CardListComponenet monsters={searchedMonster}/>
       </div>
     );
   }
