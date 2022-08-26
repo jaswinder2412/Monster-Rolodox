@@ -31,9 +31,17 @@ class App extends Component {
     const searchedMonster =  monsters.filter((monsters)=>{
       return monsters.name.toLocaleLowerCase().includes(searchfilter)
     })
+
     return (
       <div className="App">
-      <SearchBarComponent handleOnchange={handleOnchange} />
+
+      <h1 className="app-title">Monster Rolodox</h1>
+
+      <SearchBarComponent
+         className = 'monster-search-box'
+        placeHolder='Search Monster'
+        handleOnchange={handleOnchange} 
+      />
 
        <CardListComponenet monsters={searchedMonster}/>
       </div>

@@ -1,23 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import "./card-list.styles.css";
+
+import Card from '../card/Card'
 
 export class CardListComponenet extends Component {
-
-    constructor(props){
-        super(props)
-        this.props = props
-        
-    }
+  constructor(props) {
+    super(props);
+    this.props = props;
+  }
 
   render() {
-    const {monsters} = this.props;
+    console.log("Card");
+    const { monsters } = this.props;
     return (
-      <div>
-         {monsters.map((users) => {
-          return <h1 key={users.id}>{users.name}</h1>;
+      <div className="card-list">
+        {monsters.map((users) => {
+          return (
+           <Card users={users}/>
+          );
         })}
       </div>
-    )
+    );
   }
 }
 
-export default CardListComponenet
+export default CardListComponenet;

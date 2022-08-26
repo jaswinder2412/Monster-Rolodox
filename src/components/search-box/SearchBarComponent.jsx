@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
+import './search-box.css'
 
-export class SearchBarComponent extends Component {
-    constructor(props){
-        super(props)
-        this.props = props
-    }
-
+export class SearchBarComponent extends Component { 
   render() {
     return (
       <div>
-          <input type="text" name="Search-text"  id="searchbar" placeholder="Search Monster" onChange={this.props.handleOnchange}/>
+          <input type="search" className={`search-box ${this.props.className}`} name="Search-text"  id="searchbar" placeholder={this.props.placeHolder} onChange={this.props.handleOnchange}/>
       </div>
     )
   }
